@@ -2,7 +2,14 @@
   "name": "ps-redux",
   "description": "React and Redux App",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.dev.js --port 3000"
+    "start": "webpack-dev-server --config webpack.config.dev.js --port 3000",
+    "test": "jest",
+    "test-watch": "jest --watch"
+  },
+  "jest": {
+    "setupFiles": [
+      "./tools/testSetup.js"
+    ]
   },
   "dependencies": {
     "bootstrap": "4.3.1",

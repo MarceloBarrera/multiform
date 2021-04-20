@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const Step1 = (props) => {
   return (
     <div className="form-group">
-      <label htmlFor="name">Name</label>
+      <label htmlFor="name">Name (*)</label>
       <input
         className="form-control"
         id="name"
@@ -24,7 +24,7 @@ const Step1 = (props) => {
         value={props.role}
         onChange={props.handleChange}
       />
-      <label htmlFor="email">Email</label>
+      <label htmlFor="email">Email (*)</label>
       <input
         className="form-control"
         id="email"
@@ -34,7 +34,7 @@ const Step1 = (props) => {
         value={props.email}
         onChange={props.handleChange}
       />
-      <label htmlFor="password">Password</label>
+      <label htmlFor="password">Password (*)</label>
       <input
         className="form-control"
         id="password"
