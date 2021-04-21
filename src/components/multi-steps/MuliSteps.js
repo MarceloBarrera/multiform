@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
 import PropTypes from "prop-types";
+import cn from "classnames";
 
 import Step1 from "./Step1";
 import Step2 from "./Step2";
@@ -9,6 +10,7 @@ import {
   initialState,
   STATUS,
   actionTypes,
+  stepNames,
 } from "./MultiStepsReducer";
 
 const numberOfSteps = 2; // increase this number when adding more components steps
@@ -61,19 +63,47 @@ const MultiSteps = (props) => {
     }
   };
 
+  const renderTabs = () => {
+    return (
+      <ul className="nav nav-tabs">
+        {Object.keys(stepNames).map((index) => {
+          return (
+            <li key={index} className="nav-item">
+              <a
+                className={cn("nav-link", {
+                  active: parseInt(index) === state.currentStep,
+                  disabled: parseInt(index) !== state.currentStep,
+                })}
+                href="#"
+              >
+                {stepNames[index]}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  };
+
+  const renderAlert = () => {
+    return (
+      <div role="alert" className="alert alert-danger">
+        <p>Please fix the following errors:</p>
+        <ul>
+          {Object.keys(errors).map((key) => {
+            return <li key={key}>{errors[key]}</li>;
+          })}
+        </ul>
+      </div>
+    );
+  };
+
   return (
     <React.Fragment>
-      <p>Step {state.currentStep} </p>
-      {!isValid && state.status === STATUS.SUBMITTED && (
-        <div role="alert" className="alert alert-danger">
-          <p>Please fix the following errors:</p>
-          <ul>
-            {Object.keys(errors).map((key) => {
-              return <li key={key}>{errors[key]}</li>;
-            })}
-          </ul>
-        </div>
-      )}
+      {renderTabs()}
+
+      {!isValid && state.status === STATUS.SUBMITTED && renderAlert()}
+
       <form onSubmit={handleSubmit}>
         {state.currentStep === 1 && (
           <Step1

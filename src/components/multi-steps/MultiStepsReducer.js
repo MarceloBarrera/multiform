@@ -4,6 +4,11 @@ export const STATUS = {
   SUBMITTING: "SUBMITTING",
   COMPLETED: "COMPLETED",
 };
+export const stepNames = {
+  1: "User",
+  2: "Privacy",
+  3: "Done",
+};
 
 export const initialState = {
   currentStep: 1,
