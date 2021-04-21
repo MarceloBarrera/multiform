@@ -1,28 +1,17 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
+import PropTypes from "prop-types";
 
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import StepResult from "./StepResult";
+import { multiStepsReducer, initialState, STATUS } from "./MultiStepsReducer";
 
-const numberOfSteps = 2; // increase this number if you would like to add more steps
-const STATUS = {
-  IDLE: "IDLE",
-  SUBMITTED: "SUBMITTED",
-  SUBMITTING: "SUBMITTING",
-  COMPLETED: "COMPLETED",
-};
-
-const MultiSteps = () => {
-  const [state, setState] = useState({
-    currentStep: 1,
-    name: "",
-    role: "", // not required
-    email: "",
-    password: "",
-    receiveUpdate: true,
-    receiveCommunication: false,
+const numberOfSteps = 2; // increase this number when adding more components steps
+const MultiSteps = (props) => {
+  const [state, dispatch] = useReducer(multiStepsReducer, {
+    ...initialState,
+    ...props,
   });
-  const [status, setStatus] = useState(STATUS.IDLE);
 
   const getErrors = (formData) => {
     const result = {};
@@ -37,18 +26,12 @@ const MultiSteps = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setState({
-      ...state,
-      [name]: value,
-    });
+    dispatch({ type: "SET_FORM_INPUT", payload: { name, value } });
   };
 
   const handleChangeCheckbox = (event) => {
     const { name, checked } = event.currentTarget;
-    setState({
-      ...state,
-      [name]: checked,
-    });
+    dispatch({ type: "SET_FORM_CHECKBOX", payload: { name, checked } });
   };
 
   const handleSubmit = (event) => {
@@ -58,22 +41,19 @@ const MultiSteps = () => {
   };
 
   const next = () => {
-    setStatus(STATUS.SUBMITTING);
+    dispatch({ type: "SET_STATUS", payload: STATUS.SUBMITTING });
     if (isValid) {
-      setState({
-        ...state,
-        currentStep: state.currentStep + 1,
-      });
-      setStatus(STATUS.COMPLETED);
+      dispatch({ type: "SET_CURRENT_STEP", payload: state.currentStep + 1 });
+      dispatch({ type: "SET_STATUS", payload: STATUS.COMPLETED });
     } else {
-      setStatus(STATUS.SUBMITTED);
+      dispatch({ type: "SET_STATUS", payload: STATUS.SUBMITTED });
     }
   };
 
   return (
     <React.Fragment>
       <p>Step {state.currentStep} </p>
-      {!isValid && status === STATUS.SUBMITTED && (
+      {!isValid && state.status === STATUS.SUBMITTED && (
         <div role="alert" className="alert alert-danger">
           <p>Please fix the following errors:</p>
           <ul>
@@ -108,21 +88,28 @@ const MultiSteps = () => {
             id="next"
             type="button"
             onClick={next}
-            disabled={!isValid && status === STATUS.SUBMITTED}
+            disabled={!isValid && state.status === STATUS.SUBMITTED}
           >
             Submit
           </button>
         ) : state.currentStep === numberOfSteps ? (
           <input
+            data-test-submit
             type="submit"
             className="btn btn-primary float-right"
             value="Submit"
-            disabled={!isValid && status === STATUS.SUBMITTED}
+            disabled={!isValid && state.status === STATUS.SUBMITTED}
           />
         ) : null}
       </form>
     </React.Fragment>
   );
+};
+MultiSteps.propTypes = {
+  name: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
 };
 
 export default MultiSteps;

@@ -4,7 +4,8 @@
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.dev.js --port 3000",
     "test": "jest",
-    "test-watch": "jest --watch"
+    "test-watch": "jest --watch",
+    "test-coverage": "jest --collect-coverage"
   },
   "jest": {
     "setupFiles": [

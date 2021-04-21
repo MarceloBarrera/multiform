@@ -13,7 +13,16 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/about" component={AboutPage} />
-        <Route path="/multi-steps" component={MultiSteps} />
+        <Route path="/multi-steps">
+          <MultiSteps
+            name=""
+            email=""
+            password=""
+            role=""
+            receiveUpdate="true"
+            receiveCommunication="false"
+          ></MultiSteps>
+        </Route>
         <Route component={PageNotFound} />
       </Switch>
     </div>
