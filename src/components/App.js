@@ -19,8 +19,8 @@ function App() {
             email=""
             password=""
             role=""
-            receiveUpdate="true"
-            receiveCommunication="false"
+            receiveUpdate={true}
+            receiveCommunication={false}
           ></MultiSteps>
         </Route>
         <Route component={PageNotFound} />

@@ -4,7 +4,12 @@ import PropTypes from "prop-types";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import StepResult from "./StepResult";
-import { multiStepsReducer, initialState, STATUS } from "./MultiStepsReducer";
+import {
+  multiStepsReducer,
+  initialState,
+  STATUS,
+  actionTypes,
+} from "./MultiStepsReducer";
 
 const numberOfSteps = 2; // increase this number when adding more components steps
 const MultiSteps = (props) => {
@@ -26,12 +31,15 @@ const MultiSteps = (props) => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    dispatch({ type: "SET_FORM_INPUT", payload: { name, value } });
+    dispatch({ type: actionTypes.SET_FORM_INPUT, payload: { name, value } });
   };
 
   const handleChangeCheckbox = (event) => {
     const { name, checked } = event.currentTarget;
-    dispatch({ type: "SET_FORM_CHECKBOX", payload: { name, checked } });
+    dispatch({
+      type: actionTypes.SET_FORM_CHECKBOX,
+      payload: { name, checked },
+    });
   };
 
   const handleSubmit = (event) => {
@@ -41,12 +49,15 @@ const MultiSteps = (props) => {
   };
 
   const next = () => {
-    dispatch({ type: "SET_STATUS", payload: STATUS.SUBMITTING });
+    dispatch({ type: actionTypes.SET_STATUS, payload: STATUS.SUBMITTING });
     if (isValid) {
-      dispatch({ type: "SET_CURRENT_STEP", payload: state.currentStep + 1 });
-      dispatch({ type: "SET_STATUS", payload: STATUS.COMPLETED });
+      dispatch({
+        type: actionTypes.SET_CURRENT_STEP,
+        payload: state.currentStep + 1,
+      });
+      dispatch({ type: actionTypes.SET_STATUS, payload: STATUS.COMPLETED });
     } else {
-      dispatch({ type: "SET_STATUS", payload: STATUS.SUBMITTED });
+      dispatch({ type: actionTypes.SET_STATUS, payload: STATUS.SUBMITTED });
     }
   };
 
