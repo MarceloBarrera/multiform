@@ -12,7 +12,7 @@ import {
   actionTypes,
   stepNames,
 } from "./MultiStepsReducer";
-import { isValidEmail, validatePassword } from "../../utils/utils";
+import { isValidEmail, validatePassword } from "../../utils/Utils";
 
 const numberOfSteps = 2; // increase this number when adding more components steps
 const MultiSteps = (props) => {
