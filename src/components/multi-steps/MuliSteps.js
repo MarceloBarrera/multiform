@@ -12,6 +12,7 @@ import {
   actionTypes,
   stepNames,
 } from "./MultiStepsReducer";
+import { isValidEmail, validatePassword } from "../../utils/utils";
 
 const numberOfSteps = 2; // increase this number when adding more components steps
 const MultiSteps = (props) => {
@@ -24,7 +25,16 @@ const MultiSteps = (props) => {
     const result = {};
     if (!formData.name) result.name = "Name is required";
     if (!formData.email) result.email = "Email is required";
+    if (formData.email && isValidEmail(formData.email) === false) {
+      result.email = "Email is not valid";
+    }
     if (!formData.password) result.password = "Password is required";
+    if (formData.password) {
+      const passwordValidation = validatePassword(formData.password);
+      if (passwordValidation !== "") {
+        result.password = passwordValidation;
+      }
+    }
     return result;
   };
 
