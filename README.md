@@ -3,8 +3,6 @@
 1. **Install [Node 8](https://nodejs.org)** or newer. Need to run multiple versions of Node? Use [nvm](https://github.com/creationix/nvm) or [nvm-windows](https://github.com/coreybutler/nvm-windows)
 2. **Navigate to this project's root directory on the command line.**
 3. **Install Node Packages.** - `npm install`
-4. **Install [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) and [Redux Dev Tools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)** in Chrome.
-5. Having issues? See below.
 
 ## Having Issues? Try these things first:
 
@@ -52,3 +50,15 @@
 | webpack-bundle-analyzer | Generate report of what's in the app's production bundle         |
 | webpack-cli             | Run Webpack via the command line                                 |
 | webpack-dev-server      | Serve app via Webpack                                            |
+
+### Useful scripts
+
+To run the app:
+
+`npm start`
+
+If you get Error: "listen EADDRINUSE" either need to change the start script in package.json to use different port than 3000 or kill the process that is running on port 3000.
+
+To run unit tests:
+
+`npm test`

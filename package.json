@@ -1,6 +1,6 @@
 {
-  "name": "ps-redux",
-  "description": "React and Redux App",
+  "name": "playground-react-multi",
+  "description": "Playground with multi forms and react",
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.dev.js --port 3000",
     "test": "jest",
