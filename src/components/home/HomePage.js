@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 const HomePage = () => (
   <div className="jumbotron">
     <h1>Home page</h1>
-    <p>React, Redux and React Router for ultra-responsive web apps.</p>
-    <Link to="about" className="btn btn-primary btn-lg">
-      Learn more
+    <p>Home page just for fun.</p>
+    <Link to="multi-steps" className="btn btn-primary btn-lg">
+      Go to the real fun
     </Link>
   </div>
 );
