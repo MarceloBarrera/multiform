@@ -1,4 +1,4 @@
-import { validatePassword } from "../../src/utils/Utils";
+import { validatePassword } from "../../src/utils/utils";
 
 it("should have at least 9 characters", () => {
   const result = validatePassword("pepe");
