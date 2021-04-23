@@ -62,3 +62,7 @@ If you get Error: "listen EADDRINUSE" either need to change the start script in 
 To run unit tests:
 
 `npm test`
+
+### e2e testing
+
+Test coverage it is "ok" at the moment but e2e tests are comming in the next version :)
