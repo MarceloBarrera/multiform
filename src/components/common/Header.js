@@ -13,6 +13,10 @@ const Header = () => {
         Multi Steps
       </NavLink>
       {" | "}
+      <NavLink to="/launches" activeStyle={activeStyle}>
+        Launches
+      </NavLink>
+      {" | "}
       <NavLink to="/about" activeStyle={activeStyle}>
         About
       </NavLink>
