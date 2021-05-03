@@ -5,6 +5,7 @@ import AboutPage from "./about/AboutPage";
 import Header from "./common/Header";
 import PageNotFound from "./PageNotFound";
 import MultiSteps from "./multi-steps/MuliSteps";
+import Launches from "./launches/Launches";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/about" component={AboutPage} />
+        <Route path="/launches" component={Launches} />
         <Route path="/multi-steps">
           <MultiSteps
             name=""
