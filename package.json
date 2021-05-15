@@ -61,7 +61,8 @@
       "eslint:recommended",
       "plugin:react/recommended",
       "plugin:import/errors",
-      "plugin:import/warnings"
+      "plugin:import/warnings",
+      "plugin:import/react"
     ],
     "parser": "babel-eslint",
     "parserOptions": {
@@ -86,6 +87,11 @@
     "settings": {
       "react": {
         "version": "detect"
+      },
+      "import/resolver": {
+        "node": {
+          "extensions": [".js",".jsx"]
+        }
       }
     },
     "root": true

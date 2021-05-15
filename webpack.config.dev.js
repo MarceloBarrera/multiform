@@ -28,6 +28,9 @@ module.exports = {
       favicon: "src/favicon.ico"
     })
   ],
+  resolve: {
+    extensions: ['*', '.js', '.jsx'],
+  },
   module: {
     rules: [
       {
@@ -40,5 +43,6 @@ module.exports = {
         use: ["style-loader", "css-loader"]
       }
     ]
-  }
+  },
+
 };
