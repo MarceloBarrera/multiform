@@ -131,7 +131,9 @@ const MultiSteps = (props) => {
             receiveCommunication={state.receiveCommunication}
           />
         )}
-        {state.currentStep === numberOfSteps + 1 && <StepResult />}
+        {state.currentStep === numberOfSteps + 1 && (
+          <StepResult title="done foo" />
+        )}
 
         {state.currentStep < numberOfSteps ? (
           <button

@@ -1,9 +1,9 @@
 import React from "react";
 
-const StepResult = () => {
+const StepResult = ({ title }: { title: string }) => {
   return (
     <>
-      <p>DONE!</p>
+      <p>{title}!</p>
       <p>
         Please verify your email address you should have received an email from
         us already.
