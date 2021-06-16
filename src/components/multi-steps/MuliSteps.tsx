@@ -9,20 +9,35 @@ import {
   multiStepsReducer,
   initialState,
   STATUS,
-  actionTypes,
-  stepNames,
+  Kind,
+  IState,
+  Steps,
 } from "./MultiStepsReducer";
 import { isValidEmail, validatePassword } from "../../utils/utils";
 
+interface MultiStepsProps {
+  name: string,
+  email: string,
+  password: string,
+  role: string,
+  receiveUpdate: boolean,
+  receiveCommunication: boolean
+}
+type FormDataErrors = {
+  name: string,
+  email: string,
+  password: string,
+}
 const numberOfSteps = 2; // increase this number when adding more components steps
-const MultiSteps = (props) => {
+const MultiSteps = ( props: MultiStepsProps) => {
   const [state, dispatch] = useReducer(multiStepsReducer, {
     ...initialState,
     ...props,
   });
 
-  const getErrors = (formData) => {
-    const result = {};
+  const getErrors = (formData: IState) => {
+    if (formData == null) return;
+    let result: FormDataErrors = {name:null, email:null, password:null}
     if (!formData.name) result.name = "Name is required";
     if (!formData.email) result.email = "Email is required";
     if (formData.email && isValidEmail(formData.email) === false) {
@@ -39,54 +54,54 @@ const MultiSteps = (props) => {
   };
 
   const errors = getErrors(state);
-  const isValid = Object.keys(errors).length === 0;
+  const isValid = errors.email ==null && errors.name ==null && errors.password ==null
 
-  const handleChange = (event) => {
+  const handleChange = (event: any) => {
     const { name, value } = event.target;
-    dispatch({ type: actionTypes.SET_FORM_INPUT, payload: { name, value } });
+    dispatch({ kind: Kind.SET_FORM_INPUT, payload: { name, value } });
   };
 
-  const handleChangeCheckbox = (event) => {
+  const handleChangeCheckbox = (event: any) => {
     const { name, checked } = event.currentTarget;
     dispatch({
-      type: actionTypes.SET_FORM_CHECKBOX,
+      kind: Kind.SET_FORM_CHECKBOX,
       payload: { name, checked },
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
     next(); // to go to results step and show user all good.
     console.log(JSON.stringify(state, null, 2));
   };
 
   const next = () => {
-    dispatch({ type: actionTypes.SET_STATUS, payload: STATUS.SUBMITTING });
+    dispatch({ kind: Kind.SET_STATUS, payload: STATUS.SUBMITTING });
     if (isValid) {
       dispatch({
-        type: actionTypes.SET_CURRENT_STEP,
+        kind: Kind.SET_CURRENT_STEP,
         payload: state.currentStep + 1,
       });
-      dispatch({ type: actionTypes.SET_STATUS, payload: STATUS.COMPLETED });
+      dispatch({ kind: Kind.SET_STATUS, payload: STATUS.COMPLETED });
     } else {
-      dispatch({ type: actionTypes.SET_STATUS, payload: STATUS.SUBMITTED });
+      dispatch({ kind: Kind.SET_STATUS, payload: STATUS.SUBMITTED });
     }
   };
 
   const renderTabs = () => {
     return (
       <ul className="nav nav-tabs">
-        {Object.keys(stepNames).map((index) => {
+        {Steps.map( step => {
           return (
-            <li key={index} className="nav-item">
+            <li key={step.name} className="nav-item">
               <a
                 className={cn("nav-link", {
-                  active: parseInt(index) === state.currentStep,
-                  disabled: parseInt(index) !== state.currentStep,
+                  active: step.name == state.currentStep,
+                  disabled: step.position != state.currentStep,
                 })}
                 href="#"
               >
-                {stepNames[index]}
+                {step.name}
               </a>
             </li>
           );
@@ -100,8 +115,8 @@ const MultiSteps = (props) => {
       <div role="alert" className="alert alert-danger">
         <p>Please fix the following errors:</p>
         <ul>
-          {Object.keys(errors).map((key) => {
-            return <li key={key}>{errors[key]}</li>;
+          {Object.values(errors).filter(e=>e!=null).map((error: string) => {
+            return <li key={error}>{ error }</li>;
           })}
         </ul>
       </div>

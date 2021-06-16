@@ -1,7 +1,18 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const Step1 = (props) => {
+const Step1 = ({
+  name,
+  role,
+  handleChange,
+  email,
+  password,
+}: {
+  name: string;
+  role: string;
+  handleChange: (event: any) => void;
+  email: string;
+  password: string;
+}) => {
   return (
     <div className="form-group">
       <label htmlFor="name">Name (*)</label>
@@ -11,8 +22,8 @@ const Step1 = (props) => {
         name="name"
         type="text"
         placeholder="Enter name"
-        value={props.name}
-        onChange={props.handleChange}
+        value={name}
+        onChange={handleChange}
       />
       <label htmlFor="role">Role</label>
       <input
@@ -21,8 +32,8 @@ const Step1 = (props) => {
         name="role"
         type="text"
         placeholder="Enter role"
-        value={props.role}
-        onChange={props.handleChange}
+        value={role}
+        onChange={handleChange}
       />
       <label htmlFor="email">Email (*)</label>
       <input
@@ -31,8 +42,8 @@ const Step1 = (props) => {
         name="email"
         type="text"
         placeholder="Enter email"
-        value={props.email}
-        onChange={props.handleChange}
+        value={email}
+        onChange={handleChange}
       />
       <label htmlFor="password">Password (*)</label>
       <input
@@ -41,19 +52,11 @@ const Step1 = (props) => {
         name="password"
         type="password"
         placeholder="Enter password"
-        value={props.password}
-        onChange={props.handleChange}
+        value={password}
+        onChange={handleChange}
       />
     </div>
   );
-};
-
-Step1.propTypes = {
-  name: PropTypes.string.isRequired,
-  role: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
 };
 
 export default Step1;
