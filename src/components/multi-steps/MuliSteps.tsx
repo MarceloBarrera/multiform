@@ -16,20 +16,20 @@ import {
 import { isValidEmail, validatePassword } from "../../utils/utils";
 
 interface MultiStepsProps {
-  name: string,
-  email: string,
-  password: string,
-  role: string,
-  receiveUpdate: boolean,
-  receiveCommunication: boolean
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  receiveUpdate: boolean;
+  receiveCommunication: boolean;
 }
 type FormDataErrors = {
-  name: string,
-  email: string,
-  password: string,
-}
+  name: string;
+  email: string;
+  password: string;
+};
 const numberOfSteps = 2; // increase this number when adding more components steps
-const MultiSteps = ( props: MultiStepsProps) => {
+const MultiSteps = (props: MultiStepsProps) => {
   const [state, dispatch] = useReducer(multiStepsReducer, {
     ...initialState,
     ...props,
@@ -37,7 +37,7 @@ const MultiSteps = ( props: MultiStepsProps) => {
 
   const getErrors = (formData: IState) => {
     if (formData == null) return;
-    let result: FormDataErrors = {name:null, email:null, password:null}
+    let result: FormDataErrors = { name: null, email: null, password: null };
     if (!formData.name) result.name = "Name is required";
     if (!formData.email) result.email = "Email is required";
     if (formData.email && isValidEmail(formData.email) === false) {
@@ -54,7 +54,8 @@ const MultiSteps = ( props: MultiStepsProps) => {
   };
 
   const errors = getErrors(state);
-  const isValid = errors.email ==null && errors.name ==null && errors.password ==null
+  const isValid =
+    errors.email == null && errors.name == null && errors.password == null;
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
@@ -91,7 +92,7 @@ const MultiSteps = ( props: MultiStepsProps) => {
   const renderTabs = () => {
     return (
       <ul className="nav nav-tabs">
-        {Steps.map( step => {
+        {Steps.map((step) => {
           return (
             <li key={step.name} className="nav-item">
               <a
@@ -115,9 +116,11 @@ const MultiSteps = ( props: MultiStepsProps) => {
       <div role="alert" className="alert alert-danger">
         <p>Please fix the following errors:</p>
         <ul>
-          {Object.values(errors).filter(e=>e!=null).map((error: string) => {
-            return <li key={error}>{ error }</li>;
-          })}
+          {Object.values(errors)
+            .filter((e) => e != null)
+            .map((error: string) => {
+              return <li key={error}>{error}</li>;
+            })}
         </ul>
       </div>
     );
