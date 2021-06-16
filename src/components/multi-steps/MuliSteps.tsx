@@ -9,7 +9,7 @@ import {
   multiStepsReducer,
   initialState,
   STATUS,
-  Kind,
+  ActionTypes,
   IState,
   Steps,
 } from "./MultiStepsReducer";
@@ -58,13 +58,13 @@ const MultiSteps = ( props: MultiStepsProps) => {
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
-    dispatch({ kind: Kind.SET_FORM_INPUT, payload: { name, value } });
+    dispatch({ type: ActionTypes.SET_FORM_INPUT, payload: { name, value } });
   };
 
   const handleChangeCheckbox = (event: any) => {
     const { name, checked } = event.currentTarget;
     dispatch({
-      kind: Kind.SET_FORM_CHECKBOX,
+      type: ActionTypes.SET_FORM_CHECKBOX,
       payload: { name, checked },
     });
   };
@@ -76,15 +76,15 @@ const MultiSteps = ( props: MultiStepsProps) => {
   };
 
   const next = () => {
-    dispatch({ kind: Kind.SET_STATUS, payload: STATUS.SUBMITTING });
+    dispatch({ type: ActionTypes.SET_STATUS, payload: STATUS.SUBMITTING });
     if (isValid) {
       dispatch({
-        kind: Kind.SET_CURRENT_STEP,
+        type: ActionTypes.SET_CURRENT_STEP,
         payload: state.currentStep + 1,
       });
-      dispatch({ kind: Kind.SET_STATUS, payload: STATUS.COMPLETED });
+      dispatch({ type: ActionTypes.SET_STATUS, payload: STATUS.COMPLETED });
     } else {
-      dispatch({ kind: Kind.SET_STATUS, payload: STATUS.SUBMITTED });
+      dispatch({ type: ActionTypes.SET_STATUS, payload: STATUS.SUBMITTED });
     }
   };
 

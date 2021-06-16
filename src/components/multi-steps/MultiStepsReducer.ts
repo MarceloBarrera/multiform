@@ -1,10 +1,10 @@
 
-export const STATUS = {
-  IDLE: "IDLE",
-  SUBMITTED: "SUBMITTED",
-  SUBMITTING: "SUBMITTING",
-  COMPLETED: "COMPLETED",
-};
+export enum STATUS {
+  IDLE,
+  SUBMITTED,
+  SUBMITTING,
+  COMPLETED
+}
 
 interface Step {
   name:string;
@@ -40,7 +40,7 @@ export const initialState = {
 };
 
 
-export enum Kind {
+export enum ActionTypes {
   SET_CURRENT_STEP,
   SET_STATUS,
   SET_FORM_INPUT,
@@ -48,35 +48,35 @@ export enum Kind {
 }
 
 export type Action = {
-  kind : Kind.SET_CURRENT_STEP
+  type : ActionTypes.SET_CURRENT_STEP
   payload : any
 }
 | {
-  kind : Kind.SET_STATUS
+  type : ActionTypes.SET_STATUS
   payload : any
 }
 | {
-  kind : Kind.SET_FORM_INPUT
+  type : ActionTypes.SET_FORM_INPUT
   payload : any
 }
 | {
-  kind : Kind.SET_FORM_CHECKBOX
+  type : ActionTypes.SET_FORM_CHECKBOX
   payload : any
 }
 | {
-  kind : Kind.SET_CURRENT_STEP
+  type : ActionTypes.SET_CURRENT_STEP
   payload : number
 }
 
 export const multiStepsReducer = (state: IState, action: Action) => {
-  switch (action.kind) {
-    case Kind.SET_CURRENT_STEP:
+  switch (action.type) {
+    case ActionTypes.SET_CURRENT_STEP:
       return { ...state, currentStep: action.payload };
-    case Kind.SET_STATUS:
+    case ActionTypes.SET_STATUS:
       return { ...state, status: action.payload };
-    case Kind.SET_FORM_INPUT:
+    case ActionTypes.SET_FORM_INPUT:
       return { ...state, [action.payload.name]: action.payload.value };
-    case Kind.SET_FORM_CHECKBOX:
+    case ActionTypes.SET_FORM_CHECKBOX:
       return { ...state, [action.payload.name]: action.payload.checked };
     default:
       return state;
