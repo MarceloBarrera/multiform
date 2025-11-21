@@ -2,7 +2,7 @@ import {
   multiStepsReducer,
   initialState,
   STATUS,
-  ActionTypes
+  ActionTypes,
 } from "../../../src/components/multi-steps/MultiStepsReducer";
 
 it("should current step be updated", () => {

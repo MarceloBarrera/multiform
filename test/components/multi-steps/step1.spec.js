@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Step1 from "../../../src/components/multi-steps/Step1";
+import Step1 from "../../../src/components/multi-steps/steps/Step1";
 
 const render = (args) => {
   const defaultProps = {

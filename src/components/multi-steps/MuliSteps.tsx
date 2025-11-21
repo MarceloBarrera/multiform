@@ -2,9 +2,9 @@ import React, { useReducer } from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 
-import Step1 from "./Step1";
-import Step2 from "./Step2";
-import StepResult from "./StepResult";
+import Step1 from "./steps/Step1";
+import Step2 from "./steps/Step2";
+import StepResult from "./steps/StepResult";
 import {
   multiStepsReducer,
   initialState,
